@@ -1,46 +1,46 @@
-import { ThemedText } from '@/components/themed-text'
-import { ThemedView } from '@/components/themed-view'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import { useRouter } from 'expo-router'
-import { useState } from 'react'
-import { TextInput, TouchableOpacity } from 'react-native'
-import { styles } from './styles'
+import { ThemedText } from '@/components/themed-text';
+import { ThemedView } from '@/components/themed-view';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useRouter } from 'expo-router';
+import { useState } from 'react';
+import { TextInput, TouchableOpacity } from 'react-native';
+import { styles } from './styles';
 
 export default function AddHabit() {
-  const router = useRouter()
-  const [habitName, setHabitName] = useState('')
+  const router = useRouter();
+  const [habitName, setHabitName] = useState('');
 
   type Habit = {
-    id: string
-    title: string
-    doneToday: boolean
-  }
+    id: string;
+    title: string;
+    doneToday: boolean;
+  };
 
-  const STORAGE_KEY = '@habits'
+  const STORAGE_KEY = '@habits';
 
   async function handleAddHabit() {
     if (!habitName.trim()) {
-      return
+      return;
     }
 
     try {
-      const stored = await AsyncStorage.getItem(STORAGE_KEY)
-      const habits: Habit[] = stored ? JSON.parse(stored) : []
+      const stored = await AsyncStorage.getItem(STORAGE_KEY);
+      const habits: Habit[] = stored ? JSON.parse(stored) : [];
 
       const newHabit: Habit = {
         id: Date.now().toString(),
         title: habitName.trim(),
         doneToday: false,
-      }
+      };
 
-      const updated = [...habits, newHabit]
-      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updated))
+      const updated = [...habits, newHabit];
+      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
 
-      console.log('Hábito criado:', newHabit)
-      setHabitName('')
-      router.back()
+      console.log('Hábito criado:', newHabit);
+      setHabitName('');
+      router.back();
     } catch (error) {
-      console.error('Erro ao salvar hábito', error)
+      console.error('Erro ao salvar hábito', error);
     }
   }
 
@@ -48,10 +48,14 @@ export default function AddHabit() {
     <ThemedView style={styles.container}>
       {/* Botão voltar */}
       <TouchableOpacity onPress={() => router.back()}>
-        <ThemedText type="link" style={styles.backButton}>← Voltar</ThemedText>
+        <ThemedText type="link" style={styles.backButton}>
+          ← Voltar
+        </ThemedText>
       </TouchableOpacity>
 
-      <ThemedText type="h2" style={styles.title}>Novo Hábito</ThemedText>
+      <ThemedText type="h2" style={styles.title}>
+        Novo Hábito
+      </ThemedText>
 
       <TextInput
         style={styles.input}
@@ -62,8 +66,10 @@ export default function AddHabit() {
       />
 
       <TouchableOpacity style={styles.button} onPress={handleAddHabit}>
-        <ThemedText type="defaultSemiBold" style={styles.buttonText}>Salvar</ThemedText>
+        <ThemedText type="defaultSemiBold" style={styles.buttonText}>
+          Salvar
+        </ThemedText>
       </TouchableOpacity>
     </ThemedView>
-  )
+  );
 }
