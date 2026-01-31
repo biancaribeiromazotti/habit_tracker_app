@@ -13,6 +13,14 @@ export const styles = StyleSheet.create({
 
   list: {
     gap: 12,
+    flexGrow: 1,
+  },
+
+  emptyText: {
+    textAlign: 'center',
+    color: '#9CA3AF',
+    marginTop: 24,
+    paddingHorizontal: 16,
   },
 
   entry: {

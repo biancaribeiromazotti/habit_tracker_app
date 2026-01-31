@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
@@ -19,6 +19,14 @@ export const styles = StyleSheet.create({
 
   list: {
     gap: 12,
+    flexGrow: 1,
+  },
+
+  emptyText: {
+    textAlign: 'center',
+    color: '#9CA3AF',
+    marginTop: 24,
+    paddingHorizontal: 16,
   },
 
   habitItem: {
@@ -35,10 +43,15 @@ export const styles = StyleSheet.create({
     borderLeftWidth: 6,
     borderLeftColor: '#1b404dff',
     elevation: 4,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
+    ...Platform.select({
+      web: { boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.1)' },
+      ios: {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 8,
+      },
+    }),
     marginVertical: 6,
   },
 
@@ -73,23 +86,4 @@ export const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
-  finalizeButton: {
-    marginTop: 12,
-    paddingVertical: 12,
-    paddingHorizontal: 18,
-    borderRadius: 10,
-    backgroundColor: '#16A34A',
-    alignItems: 'center',
-    alignSelf: 'stretch',
-  },
-
-  finalizeButtonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: '700',
-  },
-
-  finalizeButtonExists: {
-    backgroundColor: '#F59E0B',
-  },
 });
