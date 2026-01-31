@@ -57,6 +57,7 @@ export const Radii = {
 
 export const Shadows = {
   card: Platform.select({
+    web: { boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.12)' },
     ios: {
       shadowColor: '#000',
       shadowOffset: { width: 0, height: 2 },

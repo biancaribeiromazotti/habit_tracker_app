@@ -28,3 +28,13 @@ create table public.habit_week_days (
   constraint fk_habit foreign KEY (habit_id) references habits (id) on delete CASCADE,
   constraint fk_week_day foreign KEY (week_day_id) references week_days (id)
 ) TABLESPACE pg_default;
+
+create table public.habit_day_completions (
+  id uuid not null default gen_random_uuid(),
+  habit_id uuid not null,
+  date date not null,
+  created_at timestamp with time zone null default now(),
+  constraint habit_day_completions_pkey primary key (id),
+  constraint fk_habit_completion foreign key (habit_id) references habits (id) on delete CASCADE,
+  constraint habit_day_completions_unique unique (habit_id, date)
+) TABLESPACE pg_default;
