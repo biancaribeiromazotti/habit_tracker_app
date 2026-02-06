@@ -22,7 +22,7 @@ export default function LoginScreen() {
 
   useEffect(() => {
     if (session) {
-      router.replace('/(tabs)');
+      router.replace('/(tabs)/index');
     }
   }, [session, router]);
 
